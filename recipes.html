@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RatBaking – Przepisy</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAWIGACJA -->
+<nav>
+    <a href="index.html">Strona główna</a>
+    <a href="recipes.html" class="active">Przepisy</a>
+    <a href="contact.html">Kontakt</a>
+</nav>
+
+<!-- HEADER -->
+<header>
+    <h1>RatBaking</h1>
+</header>
+
+<!-- LAYOUT PRZEPISÓW -->
+<section class="recipes-container">
+
+    <!-- LEWA BELKA -->
+    <aside class="recipes-sidebar">
+        <h3>Wybierz przepis</h3>
+
+        <button class="recipe-btn active" data-recipe="chocolate">
+            🍫 Tort czekoladowy
+        </button>
+
+        <button class="recipe-btn" data-recipe="vanilla">
+            🍓 Tort waniliowy z owocami
+        </button>
+
+        <button class="recipe-btn" data-recipe="cheesecake">
+            🍰 Sernik truskawkowy
+        </button>
+    </aside>
+
+    <!-- TREŚĆ PRZEPISU -->
+    <article class="recipe-content" id="recipeContent">
+        <!-- JS wstawi treść -->
+    </article>
+
+</section>
+
+<footer>
+    <p>© RatBaking</p>
+</footer>
+
+<script>
+    /* ===================== DANE PRZEPISÓW ===================== */
+    const recipes = {
+        chocolate: {
+            title: "Tort czekoladowy",
+            content: `
+            <p><strong>Składniki:</strong></p>
+            <ul>
+                <li>200 g mąki</li>
+                <li>150 g cukru</li>
+                <li>3 jajka</li>
+                <li>50 g kakao</li>
+                <li>100 g masła</li>
+            </ul>
+
+            <p><strong>Instrukcje:</strong></p>
+            <ol>
+                <li>Wymieszaj suche składniki.</li>
+                <li>Dodaj jajka i roztopione masło.</li>
+                <li>Piec 30 min w 180°C.</li>
+            </ol>
+
+            <p><strong>Porada:</strong> Najlepiej smakuje z kremem czekoladowym.</p>
+        `
+        },
+
+        vanilla: {
+            title: "Tort waniliowy z owocami",
+            content: `
+            <p><strong>Składniki:</strong></p>
+            <ul>
+                <li>200 g mąki</li>
+                <li>150 g cukru</li>
+                <li>3 jajka</li>
+                <li>laska wanilii</li>
+                <li>owoce sezonowe</li>
+            </ul>
+
+            <p><strong>Instrukcje:</strong></p>
+            <ol>
+                <li>Upiecz biszkopt waniliowy.</li>
+                <li>Ubij krem.</li>
+                <li>Ułóż owoce i przełóż warstwy.</li>
+            </ol>
+        `
+        },
+
+        cheesecake: {
+            title: "Sernik truskawkowy",
+            content: `
+            <p><strong>Składniki:</strong></p>
+            <ul>
+                <li>1 kg twarogu</li>
+                <li>200 g cukru</li>
+                <li>4 jajka</li>
+                <li>spód ciasteczkowy</li>
+                <li>truskawki</li>
+            </ul>
+
+            <p><strong>Instrukcje:</strong></p>
+            <ol>
+                <li>Zmiksuj masę serową.</li>
+                <li>Wylej na spód.</li>
+                <li>Piec 50 min w 160°C.</li>
+            </ol>
+        `
+        }
+    };
+
+    /* ===================== LOGIKA ===================== */
+    const buttons = document.querySelectorAll(".recipe-btn");
+    const recipeContent = document.getElementById("recipeContent");
+
+    function loadRecipe(key) {
+        recipeContent.innerHTML = `
+        <h2>${recipes[key].title}</h2>
+        ${recipes[key].content}
+    `;
+
+        buttons.forEach(btn => btn.classList.remove("active"));
+        document.querySelector(`[data-recipe="${key}"]`).classList.add("active");
+    }
+
+    // Załaduj domyślny przepis
+    loadRecipe("chocolate");
+
+    // Obsługa kliknięć
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            loadRecipe(button.dataset.recipe);
+        });
+    });
+
+    const hash = window.location.hash.substring(1); // usuwa #
+    if (hash && recipes[hash]) {
+        loadRecipe(hash);
+    }
+</script>
+
+</body>
+</html>
