@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RatBaking – Przepisy</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -22,134 +21,154 @@
     <h1>RatBaking</h1>
 </header>
 
-<!-- LAYOUT PRZEPISÓW -->
+<!-- SEKCJA PRZEPISÓW -->
 <section class="recipes-container">
 
-    <!-- LEWA BELKA -->
+    <!-- SIDEBAR -->
     <aside class="recipes-sidebar">
         <h3>Wybierz przepis</h3>
-
-        <button class="recipe-btn active" data-recipe="chocolate">
-            🍫 Tort czekoladowy
-        </button>
-
-        <button class="recipe-btn" data-recipe="vanilla">
-            🍓 Tort waniliowy z owocami
-        </button>
-
-        <button class="recipe-btn" data-recipe="cheesecake">
-            🍰 Sernik truskawkowy
-        </button>
+        <button class="recipe-btn active" data-recipe="chocolate">🍫 Tort czekoladowy</button>
+        <button class="recipe-btn" data-recipe="vanilla">🍓 Tort waniliowy z owocami</button>
+        <button class="recipe-btn" data-recipe="cheesecake">🍰 Sernik truskawkowy</button>
     </aside>
 
     <!-- TREŚĆ PRZEPISU -->
-    <article class="recipe-content" id="recipeContent">
-        <!-- JS wstawi treść -->
-    </article>
+    <div class="recipe-wrapper">
+        <aside class="ingredients" id="ingredients">
+            <!-- Składniki wstawiane przez JS -->
+        </aside>
+        <div class="instructions" id="instructions">
+            <!-- Instrukcje wstawiane przez JS -->
+        </div>
+    </div>
 
 </section>
 
+<!-- STOPKA -->
 <footer>
     <p>© RatBaking</p>
 </footer>
 
+<!-- SKRYPT Z PRZEPISAMI -->
 <script>
-    /* ===================== DANE PRZEPISÓW ===================== */
     const recipes = {
         chocolate: {
             title: "Tort czekoladowy",
-            content: `
-            <p><strong>Składniki:</strong></p>
-            <ul>
-                <li>200 g mąki</li>
-                <li>150 g cukru</li>
-                <li>3 jajka</li>
-                <li>50 g kakao</li>
-                <li>100 g masła</li>
-            </ul>
-
-            <p><strong>Instrukcje:</strong></p>
-            <ol>
-                <li>Wymieszaj suche składniki.</li>
-                <li>Dodaj jajka i roztopione masło.</li>
-                <li>Piec 30 min w 180°C.</li>
-            </ol>
-
-            <p><strong>Porada:</strong> Najlepiej smakuje z kremem czekoladowym.</p>
-        `
+            ingredients: [
+                "200 g gorzkiej czekolady",
+                "200 g masła",
+                "250 g cukru",
+                "4 duże jajka",
+                "150 g mąki pszennej",
+                "50 g kakao",
+                "1 łyżeczka proszku do pieczenia",
+                "Szczypta soli",
+                "250 g masła (do kremu)",
+                "200 g czekolady mlecznej lub gorzkiej (do kremu)",
+                "150 g cukru pudru",
+                "100 ml śmietanki kremówki",
+                "Dodatkowo: kostki czekolady, owoce lub wiórki kokosowe do dekoracji"
+            ],
+            instructions: [
+                "Rozgrzej piekarnik do 180°C. Przygotuj formę o średnicy około 24 cm: wyłóż ją papierem do pieczenia i lekko natłuść masłem, aby ciasto nie przywarło.",
+                "Czekoladę połamaną na kostki oraz masło rozpuść w kąpieli wodnej lub w mikrofalówce. Mieszaj cały czas, aż masa będzie gładka i jednolita. Odstaw do lekkiego przestudzenia.",
+                "W osobnej misce ubij jajka z cukrem na jasną, puszystą masę, aż podwoją objętość.",
+                "Delikatnie wmieszaj przestudzoną czekoladę z masłem do ubitych jajek, mieszając szpatułką.",
+                "Przesiej mąkę, kakao, proszek do pieczenia i sól. Stopniowo dodawaj do masy, mieszając delikatnie.",
+                "Przelej ciasto do przygotowanej formy i wyrównaj powierzchnię. Piecz przez 35-40 minut. Po ostudzeniu przetnij na blaty.",
+                "Do kremu ubij masło z cukrem pudrem, dodaj roztopioną czekoladę i śmietankę kremówkę, miksując do uzyskania gładkiej konsystencji.",
+                "Każdy blat posmaruj kremem, połącz warstwy i pokryj cały tort resztą kremu.",
+                "Udekoruj startą czekoladą, owocami lub wiórkami kokosowymi. Schłódź w lodówce 2-3 godziny.",
+                "Podawaj w temperaturze pokojowej. Tort czekoladowy jest wilgotny i aromatyczny."
+            ]
         },
-
         vanilla: {
-            title: "Tort waniliowy z owocami",
-            content: `
-            <p><strong>Składniki:</strong></p>
-            <ul>
-                <li>200 g mąki</li>
-                <li>150 g cukru</li>
-                <li>3 jajka</li>
-                <li>laska wanilii</li>
-                <li>owoce sezonowe</li>
-            </ul>
-
-            <p><strong>Instrukcje:</strong></p>
-            <ol>
-                <li>Upiecz biszkopt waniliowy.</li>
-                <li>Ubij krem.</li>
-                <li>Ułóż owoce i przełóż warstwy.</li>
-            </ol>
-        `
+            title: "Tort waniliowy",
+            ingredients: [
+                "200 g masła w temperaturze pokojowej",
+                "200 g cukru",
+                "4 duże jajka",
+                "250 g mąki pszennej",
+                "2 łyżeczki proszku do pieczenia",
+                "1 łyżeczka ekstraktu waniliowego",
+                "Szczypta soli",
+                "200 ml mleka",
+                "250 g masła (do kremu)",
+                "200 g cukru pudru",
+                "300 ml śmietanki kremówki",
+                "Dodatkowo: świeże owoce, posypka lub wiórki czekoladowe"
+            ],
+            instructions: [
+                "Rozgrzej piekarnik do 180°C. Formę o średnicy 24 cm wyłóż papierem do pieczenia i lekko natłuść masłem.",
+                "Masło ubij z cukrem na puszystą masę.",
+                "Dodawaj po jednym jajku, cały czas miksując. Dodaj ekstrakt waniliowy.",
+                "Przesiej mąkę z proszkiem do pieczenia i solą, dodawaj na przemian z mlekiem, mieszając szpatułką.",
+                "Przelej ciasto do formy i piecz 35-40 minut. Ostudź i przetnij na blaty.",
+                "Do kremu ubij masło z cukrem pudrem, dodaj śmietankę i miksuj do gładkości.",
+                "Każdy blat posmaruj kremem, złącz warstwy i pokryj resztą kremu.",
+                "Udekoruj świeżymi owocami lub posypką. Schłódź kilka godzin przed podaniem."
+            ]
         },
-
         cheesecake: {
-            title: "Sernik truskawkowy",
-            content: `
-            <p><strong>Składniki:</strong></p>
-            <ul>
-                <li>1 kg twarogu</li>
-                <li>200 g cukru</li>
-                <li>4 jajka</li>
-                <li>spód ciasteczkowy</li>
-                <li>truskawki</li>
-            </ul>
-
-            <p><strong>Instrukcje:</strong></p>
-            <ol>
-                <li>Zmiksuj masę serową.</li>
-                <li>Wylej na spód.</li>
-                <li>Piec 50 min w 160°C.</li>
-            </ol>
-        `
+            title: "Sernik z truskawkami",
+            ingredients: [
+                "200 g ciastek digestive lub herbatników",
+                "100 g masła roztopionego",
+                "600 g twarogu sernikowego",
+                "250 g cukru",
+                "3 jajka",
+                "200 ml śmietanki kremówki",
+                "1 łyżeczka ekstraktu waniliowego",
+                "300 g świeżych truskawek",
+                "2 łyżki żelatyny",
+                "3 łyżki wody (do żelatyny)"
+            ],
+            instructions: [
+                "Rozgrzej piekarnik do 160°C. Formę 24 cm wyłóż papierem do pieczenia.",
+                "Ciasteczka zmiksuj i połącz z masłem. Wciśnij spód do formy i wstaw do lodówki na 15 minut.",
+                "W misce ubij twaróg z cukrem. Dodawaj jajka, ekstrakt waniliowy i śmietankę kremówkę, mieszając delikatnie.",
+                "Przelej masę na spód ciasteczkowy i piecz 50-60 minut. Po upieczeniu pozostaw w piekarniku przy uchylonych drzwiczkach 30 minut.",
+                "Ostudź sernik, wstaw do lodówki na co najmniej 4 godziny.",
+                "Przygotuj galaretkę z żelatyny i wody, ostudzoną wylej na sernik.",
+                "Ułóż pokrojone truskawki na wierzchu.",
+                "Sernik przechowuj w lodówce do momentu podania."
+            ]
         }
     };
 
-    /* ===================== LOGIKA ===================== */
     const buttons = document.querySelectorAll(".recipe-btn");
-    const recipeContent = document.getElementById("recipeContent");
+    const ingredientsEl = document.getElementById("ingredients");
+    const instructionsEl = document.getElementById("instructions");
 
     function loadRecipe(key) {
-        recipeContent.innerHTML = `
-        <h2>${recipes[key].title}</h2>
-        ${recipes[key].content}
-    `;
+        const recipe = recipes[key];
 
+        // Składniki
+        ingredientsEl.innerHTML = `<h3>Składniki</h3><ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join("")}</ul>`;
+
+        // Instrukcje
+        instructionsEl.innerHTML = `<h2>${recipe.title}</h2>${recipe.instructions.map(i => `<p>${i}</p>`).join("")}`;
+
+        // Aktywny przycisk
         buttons.forEach(btn => btn.classList.remove("active"));
         document.querySelector(`[data-recipe="${key}"]`).classList.add("active");
     }
 
-    // Załaduj domyślny przepis
-    loadRecipe("chocolate");
+    // Domyślny przepis
+    const hash = window.location.hash.substring(1);
+    if(hash && recipes[hash]) {
+        loadRecipe(hash);
+    } else {
+        loadRecipe("chocolate");
+    }
 
-    // Obsługa kliknięć
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            loadRecipe(button.dataset.recipe);
+    // Obsługa kliknięć w sidebar
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            loadRecipe(btn.dataset.recipe);
+            instructionsEl.scrollIntoView({behavior: "smooth"});
         });
     });
-
-    const hash = window.location.hash.substring(1); // usuwa #
-    if (hash && recipes[hash]) {
-        loadRecipe(hash);
-    }
 </script>
 
 </body>
